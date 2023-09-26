@@ -1,0 +1,31 @@
+version: '3.7'
+services: 
+  mysql:
+    image: mysql:5.7
+    container_name: dbcode
+    ports: 
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: dbcode
+      MYSQL_ROOT_PASSWORD: dbcode
+    volumes:
+      - ./docker/mysql/data:/var/lib/mysql/
+      - ./docker/mysql/based.sql:/docker-entrypoint-initdb.d/based.sql
+    networks:
+      - mynetwork
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    image: 'codeigniters'
+    depends_on:
+      - mysql
+    networks:
+      - mynetwork
+    ports:
+      - 8080:8080
+    command: sh docker/docker-entrypoint.sh
+    volumes:
+      - ./:/var/www/html
+networks:
+  mynetwork:
