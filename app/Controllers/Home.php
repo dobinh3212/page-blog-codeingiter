@@ -23,15 +23,5 @@ class Home extends BaseController
             die();
         }
         var_dump("Connected successfully");
-
-        // Check insert
-        // $sql = "INSERT INTO news (news_title, news_slug, news_description) VALUES ('Title', 'title', 'Lorem ipsum')";
-        // if (mysqli_query($conn, $sql)) {
-        //     $last_id = mysqli_insert_id($conn);
-        //     var_dump("New record created successfully. Last inserted ID is: " . $last_id);
-        // } else {
-        //     var_dump(mysqli_error($conn));
-        //     die();
-        // }
     }
 }
