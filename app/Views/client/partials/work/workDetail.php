@@ -26,7 +26,7 @@
     </div>
 </div>
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function() {
         var elementToModify = document.getElementById("isActiveWork");
         if (elementToModify) {
             elementToModify.classList.add("isActive");

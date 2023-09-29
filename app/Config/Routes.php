@@ -5,7 +5,8 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Home::index');
+
+$routes->get('/', 'BlogController::index', ['as' => '/']);
 
 $routes->group('admin', function ($routes) {
     $routes->get('/', 'DashboardController::index');
@@ -28,3 +29,10 @@ $routes->group('admin', function ($routes) {
         $routes->get('show/(:num)', 'PostController::show/$1', ['as' => 'post.show']);
     });
 });
+
+$routes->group('work', function ($routes) {
+    $routes->get('/', 'BlogController::work', ['as' => 'blog.work']);
+    $routes->get('(:num)', 'BlogController::workDetail/$1', ['as' => 'blog.workDetail']);
+});
+$routes->get('blog', 'BlogController::blog', ['as' => 'blog.blog']);
+$routes->get('(:any)', 'BlogController::postDetail/$1', ['as' => 'post.postDetail']);

@@ -1,6 +1,6 @@
 <div class="banner container d-flex mt-5 mb-5">
     <div class="col d-flex align-items-start justify-content-center mt-5 mb-5 order-2">
-        <img class="rounded-circle image-banner" src="{{ asset('img/ellipse.png') }}" width="46%">
+        <img class="rounded-circle image-banner" src="<?= base_url('/img/ellipse.png') ?>" width="46%">
     </div>
     <div class="col mt-5 mb-5 order-1">
         <span class="fs-44 fw-bold">Hi, I am John,</span>

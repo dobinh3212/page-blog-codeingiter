@@ -1,6 +1,7 @@
-@include('client.partials.dashboard.banner')
-@include('client.partials.dashboard.recentPost')
-@include('client.partials.dashboard.featuredWork.index')
+<?php echo view('client/partials/dashboard/banner'); ?>
+<?php echo view('client/partials/dashboard/recentPost'); ?>
+<?php echo view('client/partials/dashboard/featuredWork/index'); ?>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
     $('#switchViewGrid').click(function() {

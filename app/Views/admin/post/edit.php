@@ -65,14 +65,8 @@
                         <label class="form-label fw-bold">Tags:</label>
                         <input class="form-control" type="text" id="tag-input" placeholder="Add tag and Enter">
                         <div class="tag-container mt-2" id="tag-container">
-                            <?php foreach ($tagNames as $tagName) : ?>
-                                <div class="tag">
-                                    <span class="tag-text"><?= $tagName; ?></span>
-                                    <span class="tag-remove fww-bold" data-name="<?= $tagName; ?>">x</span>
-                                </div>
-                            <?php endforeach; ?>
                         </div>
-                        <input type="hidden" name="tag_name" id="tagInput1" value="<?= implode(',', $tagNames); ?>">
+                        <input type="hidden" name="tag_name" id="tagInput1" value="">
                     </div>
                     <div class="mb-3">
                         <label class="form-label fw-bold">Description:</label>

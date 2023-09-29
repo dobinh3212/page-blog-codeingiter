@@ -15,16 +15,16 @@
 </div>
 <div class="container-lg mt-4">
     <div class="card mb-4">
-        <?php if(session()->has('error')): ?>
-        <div class="alert alert-danger" role="alert">
-            <?= session('error') ?>
-        </div>
+        <?php if (session()->has('error')) : ?>
+            <div class="alert alert-danger" role="alert">
+                <?= session('error') ?>
+            </div>
         <?php endif; ?>
 
-        <?php if(session()->has('success') || !empty($success)): ?>
-        <div class="alert alert-success" role="alert">
-            <?= session('success') ?? $success ?>
-        </div>
+        <?php if (session()->has('success') || !empty($success)) : ?>
+            <div class="alert alert-success" role="alert">
+                <?= session('success') ?? $success ?>
+            </div>
         <?php endif; ?>
         <div style="font-size: 24px;" class="card-header d-flex">
             <div class="col-6">
@@ -56,31 +56,31 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach($posts as $post): ?>
-                        <tr>
-                            <th><?= $post['id'] ?></th>
-                            <td><?= $post['title'] ?></td>
-                            <td><?= $post['description'] ?></td>
-                            <td><?= $post['content'] ?></td>
-                            <td><img src="<?= base_url($post['img']??'') ?>" width="100px" height="80px"></td>
-                            <td style="text-align: center; width: 50px;">
-                                <form method="POST" action="<?= route_to('post.delete', $post['id']) ?>">
-                                    <?= csrf_field() ?>
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <div>
-                                        <a href="<?= route_to('post.show', $post['id']) ?>" class="btn btn-primary btn-xs col-12 mb-1">
-                                            show
-                                        </a>
-                                        <a href="<?= route_to('post.edit', $post['id']) ?>" class="btn btn-primary btn-xs col-12 mb-1">
-                                            edit
-                                        </a>
-                                        <button type="submit" class="btn btn-danger btn-xs col-12" onclick="return confirm('Bạn có chắc không?')">
-                                            <i class="far fa-trash-alt"></i> delete
-                                        </button>
-                                    </div>
-                                </form>
-                            </td>
-                        </tr>
+                        <?php foreach ($posts as $post) : ?>
+                            <tr>
+                                <th><?= $post->id ?></th>
+                                <td><?= $post->title ?></td>
+                                <td><?= $post->description ?></td>
+                                <td><?= $post->content ?></td>
+                                <td><img src="<?= base_url($post->img ?? '') ?>" width="100px" height="80px"></td>
+                                <td style="text-align: center; width: 50px;">
+                                    <form method="POST" action="<?= route_to('post.delete', $post->id) ?>">
+                                        <?= csrf_field() ?>
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <div>
+                                            <a href="<?= route_to('post.show', $post->id) ?>" class="btn btn-primary btn-xs col-12 mb-1">
+                                                show
+                                            </a>
+                                            <a href="<?= route_to('post.edit', $post->id) ?>" class="btn btn-primary btn-xs col-12 mb-1">
+                                                edit
+                                            </a>
+                                            <button type="submit" class="btn btn-danger btn-xs col-12" onclick="return confirm('Bạn có chắc không?')">
+                                                <i class="far fa-trash-alt"></i> delete
+                                            </button>
+                                        </div>
+                                    </form>
+                                </td>
+                            </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>

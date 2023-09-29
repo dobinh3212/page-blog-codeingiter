@@ -20,7 +20,7 @@ class PostController extends Controller
 
     public function index(): string
     {
-        $posts['posts'] = $this->post->findAll();
+        $posts = $this->post->getAll();
 
         return view('admin/post/index', $posts);
     }
@@ -34,18 +34,6 @@ class PostController extends Controller
 
     public function store(): \CodeIgniter\HTTP\RedirectResponse
     {
-        // helper('form');
-        // $validationRules = [
-        //     'title' => 'required|min_length[5]|max_length[255]',
-        //     'description' => 'required|min_length[10]|max_length[500]',
-        //     'content' => 'required',
-        //     'category_id' => 'required',
-        //     // 'img' => 'uploaded[img]|max_size[img,1024]|is_image[img]'
-        // ];
-
-        // if (!$this->validate($validationRules)) {
-        //     return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
-        // }
         $this->post->createPost($this->request);
 
         return redirect()->to(base_url('admin/post'))->with('success', 'Create post successful');
@@ -54,10 +42,19 @@ class PostController extends Controller
     public function edit($id): string
     {
         $data['post'] = $this->post->find($id);
-        $data['category'] = $this->category->find($id);
+        $data['category'] = $this->post->getCategory($id, 1);
         $data['categorys'] = $this->category->findAll();
-        $data['tagNames'] = [];
-        $data['categoryIds'] = [];
+        $tagNames = [];
+        foreach ($this->post->getCategory($id, 2) as $tagResult) {
+            $tagNames[] = $tagResult->name;
+        }
+        $data['tagNames'] = $tagNames;
+
+        $categoryIds = [];
+        foreach ($data['category'] as $categoryResult) {
+            $categoryIds[] = $categoryResult->id;
+        }
+        $data['categoryIds'] = $categoryIds;
 
         return view('admin/post/edit', $data);
     }
