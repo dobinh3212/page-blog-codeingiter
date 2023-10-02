@@ -2,42 +2,42 @@
 
 namespace App\Controllers;
 
-use App\Models\Category;
-use App\Models\Post;
+use App\Services\CategoryService;
+use App\Services\PostService;
 use CodeIgniter\Controller;
 
 class BlogController extends Controller
 {
-    protected $post;
-    protected $category;
+    protected $postService;
+    protected $categoryService;
 
     public function __construct()
     {
-        $this->post = new Post();
-        $this->category = new Category();
+        $this->postService = new PostService();
+        $this->categoryService = new CategoryService();
     }
 
     public function index()
     {
-        $posts = $this->post->getAll('desc', 2);
-        $posts['postModel'] = $this->post;
+        $posts = $this->postService->getAll('desc', 2);
+        $posts['postModel'] = $this->postService;
         return view('client/index', $posts);
     }
 
     public function postDetail(string $slug)
     {
-        $data['post'] = $this->post->getPostDetail($slug);
-        $data['categorys'] = $this->post->getCategory($data['post']['id']);
+        $data['post'] = $this->postService->getPostDetail($slug);
+        $data['categorys'] = $this->postService->getCategory($data['post']['id']);
 
         return view('client/partials/post/detail', $data);
     }
 
     public function blog()
     {
-        $posts = $this->post->getAll();
+        $posts = $this->postService->getAll();
         $datas = [];
         foreach ($posts['posts'] as $key => $post) {
-            $datas[$key]['categorys'] = $this->post->getCategory($post->id);
+            $datas[$key]['categorys'] = $this->postService->getCategory($post->id);
             $datas[$key]['post'] = $post;
         }
 

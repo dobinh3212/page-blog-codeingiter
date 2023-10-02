@@ -9,6 +9,10 @@ class Category extends Model
     protected $table = 'categories';
 
     protected $primaryKey = 'id';
+    
+    protected $useTimestamps = true;
+    protected $createdField = 'created_at';
+    protected $updatedField = 'updated_at';
 
     protected $allowedFields = [
         'name',
@@ -19,27 +23,5 @@ class Category extends Model
     public function parent($id)
     {
         return $this->find($id);
-    }
-
-    public function createCategory($request)
-    {
-        $data = [
-            'name' => $request->getPost('name'),
-            'type' => $request->getPost('type'),
-            'parent_id' => $request->getPost('parent_id'),
-        ];
-
-        return $this->insert($data);
-    }
-
-    public function updateCategory(string $id, $request)
-    {
-        $data = [
-            'name' => $request->getPost('name'),
-            'type' => $request->getPost('type'),
-            'parent_id' => $request->getPost('parent_id'),
-        ];
-        
-        return $this->update($id, $data);
     }
 }
