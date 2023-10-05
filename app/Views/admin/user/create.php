@@ -9,7 +9,7 @@
                     <a class="text-decoration-none" href="<?= route_to('dashboard.index') ?>">Admin</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a class="text-decoration-none" href="<?= route_to('category.index') ?>">Category</a>
+                    <a class="text-decoration-none" href="<?= route_to('user.index') ?>">User</a>
                 </li>
                 <li class="breadcrumb-item active"><span>Create</span></li>
             </ol>
@@ -23,7 +23,7 @@
                 <span class="small ms-1">Form</span>
             </div>
             <div class="d-flex col-6 justify-content-end">
-                <a href="<?= route_to('category') ?>" class="btn btn-success btn-xs">
+                <a href="<?= route_to('user') ?>" class="btn btn-success btn-xs">
                     List
                 </a>
             </div>
@@ -32,35 +32,19 @@
             <?= view('errors/errors') ?>
             <div class="card-body d-flex">
                 <div class="col-12 d-flex justify-content-center">
-                    <form action="<?= route_to('category.store') ?>" method="post" class="col-8" style="font-size: 18px;">
+                    <form action="<?= route_to('user.store') ?>" method="post" class="col-8" style="font-size: 18px;">
                         <?= csrf_field() ?>
                         <div class="mb-3">
-                            <label class="form-label">Name:</label>
-                            <input name="name" type="text" class="form-control">
+                            <label class="form-label">Email:</label>
+                            <input name="email" type="email" class="form-control">
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Type:</label>
-                            <div class="d-flex">
-                                <div class="me-4">
-                                    <input type="radio" name="type" value="1" id="typeA" required>
-                                    <label for="typeA">Category</label>
-                                </div>
-                                <div>
-                                    <input type="radio" name="type" value="2" id="typeB" required>
-                                    <label for="typeB">Tag</label>
-                                </div>
-                            </div>
+                            <label class="form-label">Name:</label>
+                            <input name="name" type="name" class="form-control">
                         </div>
-                        <div class="mb-3" id="parent_select">
-                            <label class="form-label">Parent:</label>
-                            <div>
-                                <select name="parent_id" id="parent_id" class="form-control">
-                                    <option value="">-- select --</option>
-                                    <?php foreach ($categorys as $category) : ?>
-                                        <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
-                                    <?php endforeach ?>
-                                </select>
-                            </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password:</label>
+                            <input name="password" type="password" class="form-control">
                         </div>
                         <button type="submit" class="btn btn-primary mb-4 mt-3">Submit</button>
                     </form>

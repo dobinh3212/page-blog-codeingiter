@@ -1,15 +1,15 @@
-<?= $this->extend('admin/layouts/layout'); ?>
+<?= $this->extend('admin/layouts/layout') ?>
 
-<?= $this->section('content'); ?>
+<?= $this->section('content') ?>
 <div class="header">
     <div class="container-fluid" style="font-size: 20px;">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb my-0 ms-2">
                 <li class="breadcrumb-item">
-                    <a class="text-decoration-none" href="<?= route_to('dashboard'); ?>">Admin</a>
+                    <a class="text-decoration-none" href="<?= route_to('dashboard.index') ?>">Admin</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a class="text-decoration-none" href="<?= route_to('post'); ?>">Post</a>
+                    <a class="text-decoration-none" href="<?= route_to('user.index') ?>">User</a>
                 </li>
                 <li class="breadcrumb-item active"><span>Show</span></li>
             </ol>
@@ -20,23 +20,25 @@
     <div class="card mb-4">
         <div style="font-size: 30px;" class="card-header d-flex">
             <div class="col-6">
-                <span class="small ms-1">Show</span>
+                <span class="small ms-1">Detail</span>
             </div>
             <div class="d-flex col-6 justify-content-end">
-                <a href="<?= route_to('post'); ?>" class="btn btn-success btn-xs">
+                <a href="<?= route_to('user') ?>" class="btn btn-success btn-xs">
                     List
                 </a>
             </div>
         </div>
         <div class="body flex-grow-1 px-5 mt-3">
-            <div class="card-body d-flex justify-content-center">
-                <div class="mb-3 col-7">
-                    <h1 class="fw-bold"><?= $post['title']; ?></h1>
-                    <?= $post['content']; ?>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label class="form-label">Name: <?= esc($user['name']) ?></label>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Email: <?=  esc($user['email']) ?></label>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<?= $this->endSection(); ?>
+<?= $this->endSection() ?>

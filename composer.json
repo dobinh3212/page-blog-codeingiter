@@ -19,6 +19,9 @@
         "mikey179/vfsstream": "^1.6",
         "phpunit/phpunit": "^9.1"
     },
+    "provide": {
+        "codeigniter4/authentication-implementation": "1.0"
+    },
     "autoload": {
         "exclude-from-classmap": [
             "**/Database/Migrations/**"

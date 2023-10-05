@@ -44,6 +44,7 @@
     </div>
 </body>
 <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="<?= base_url('/template/vendors/@coreui/coreui/js/coreui.bundle.min.js') ?>"></script>
 <script>
     tinymce.init({
         selector: '#mytextarea1',

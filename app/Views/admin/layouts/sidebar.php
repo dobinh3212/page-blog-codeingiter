@@ -3,11 +3,15 @@
         <h2>BINH DV</h2>
     </div>
     <ul class="sidebar-nav">
-        <li class="nav-item"><a class="nav-link" href="<?= base_url('dashboard/index') ?>">
+        <li class="nav-item"><a class="nav-link" href="<?= base_url('admin') ?>">
             <svg class="nav-icon">
             </svg> Dashboard<span class="badge badge-sm bg-info ms-auto">NEW</span></a>
         </li>
         <li class="nav-title">Manages</li>
+        <li class="nav-item"><a class="nav-link" href="<?= base_url('admin/user') ?>">
+            <svg class="nav-icon">
+            </svg> User</a>
+        </li>
         <li class="nav-item"><a class="nav-link" href="<?= base_url('admin/category') ?>">
             <svg class="nav-icon">
             </svg> Category</a>

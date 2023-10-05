@@ -19,15 +19,19 @@ class BlogController extends Controller
 
     public function index()
     {
-        $posts = $this->postService->getAll('desc', 2);
-        $posts['postModel'] = $this->postService;
-        return view('client/index', $posts);
+        $data['posts'] = $this->postService->getAll('desc', 2);
+        $data['postModel'] = $this->postService;
+        return view('client/index', $data);
     }
 
     public function postDetail(string $slug)
     {
         $data['post'] = $this->postService->getPostDetail($slug);
+        if (empty($data['post'])) {
+            return view('errors/html/error_404', ['message' => 'Page not found']);
+        }
         $data['categorys'] = $this->postService->getCategory($data['post']['id']);
+        $data['posts'] = $this->postService->getAll();
 
         return view('client/partials/post/detail', $data);
     }
@@ -36,7 +40,7 @@ class BlogController extends Controller
     {
         $posts = $this->postService->getAll();
         $datas = [];
-        foreach ($posts['posts'] as $key => $post) {
+        foreach ($posts as $key => $post) {
             $datas[$key]['categorys'] = $this->postService->getCategory($post->id);
             $datas[$key]['post'] = $post;
         }

@@ -42,17 +42,18 @@ class PostService
         return $query->getResult();
     }
 
-    public function getAll(string $order = 'desc', int $perPage = null, int $page = 1)
+    public function getAll(string $order = 'desc', int $perPage = null, int $page = 1, string $search = null)
     {
         $builder = $this->post->builder();
         if ($perPage) {
             $offset = ($page - 1) * $perPage;
             $builder->limit($perPage, $offset);
         }
+        if ($search) {
+            $builder->like('title', '%' . $search . '%');
+        }
         $builder->orderBy('id', $order);
-        $posts['posts'] = $builder->get()->getResult();
-
-        return $posts;
+        return $builder->get()->getResult();
     }
 
     public function createSlug($str)

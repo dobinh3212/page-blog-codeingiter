@@ -20,7 +20,7 @@ class PostController extends Controller
 
     public function index(): string
     {
-        $posts = $this->postService->getAll();
+        $posts['posts'] = $this->postService->getAll('desc', null, 1, $this->request->getGet('search'));
 
         return view('admin/post/index', $posts);
     }

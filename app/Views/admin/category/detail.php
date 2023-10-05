@@ -1,7 +1,7 @@
 <?= $this->extend('admin/layouts/layout') ?>
 
 <?= $this->section('content') ?>
-<div class="header header-sticky">
+<div class="header">
     <div class="container-fluid" style="font-size: 20px;">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb my-0 ms-2">
