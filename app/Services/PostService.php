@@ -10,11 +10,15 @@ use Cocur\Slugify\Slugify;
 class PostService
 {
     protected Post $post;
+    protected PostCategory $postCategory;
+    protected Category $category;
     protected CategoryService $categoryService;
 
     public function __construct()
     {
-        $this->post = new Post;
+        $this->post = new Post();
+        $this->postCategory = new PostCategory();
+        $this->category = new Category();
         $this->categoryService = new CategoryService();
     }
 
@@ -55,6 +59,35 @@ class PostService
         $builder->orderBy('id', $order);
         return $builder->get()->getResult();
     }
+
+    public function getPost($request): mixed
+    {
+        if (!empty($request['category']) || !empty($request['tag'])) {
+            $query = $this->category;
+            if (!empty($request['category'])) {
+                $query->where('name', $request['category']);
+                $query->where('type', 1);
+            } elseif (!empty($request['tag'])) {
+                $query->where('name', $request['tag']);
+                $query->where('type', 2);
+            }
+            if ($category = $query->first()) {
+                $categoryId = $category['id'];
+                $this->postCategory->select('post_id');
+                $this->postCategory->where('category_id', $categoryId);
+                $postCategoryQuery = $this->postCategory->get();
+                $postIds = $postCategoryQuery->getResultArray();
+                if ($postIds) {
+                    $postIds = array_column($postIds, 'post_id');
+                    $this->post->select('*');
+                    $this->post->whereIn('id', $postIds);
+                    return $this->post->get()->getResult();
+                }
+            }
+        }
+        return $this->post->get()->getResult();
+    }
+
 
     public function createSlug($str)
     {

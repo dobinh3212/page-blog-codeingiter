@@ -31,14 +31,14 @@ class BlogController extends Controller
             return view('errors/html/error_404', ['message' => 'Page not found']);
         }
         $data['categorys'] = $this->postService->getCategory($data['post']['id']);
-        $data['posts'] = $this->postService->getAll();
+        $data['posts'] = $this->postService->getAll('desc', 6);
 
         return view('client/partials/post/detail', $data);
     }
 
     public function blog()
     {
-        $posts = $this->postService->getAll();
+        $posts = $this->postService->getPost($this->request->getGet());
         $datas = [];
         foreach ($posts as $key => $post) {
             $datas[$key]['categorys'] = $this->postService->getCategory($post->id);

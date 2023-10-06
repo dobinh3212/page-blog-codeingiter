@@ -3,9 +3,12 @@
 <?php $this->section('content'); ?>
 <div class="mb-5">
     <div class="body flex-grow-1 px-5">
+        <div class="col-2 d-flex justify-content-center">
+            <a class="fw-bold text-dark text-decoration-none" style="border-bottom: 1px solid #921d1d !important;" href="<?= route_to('blog.blog') ?>">Xem nhiều</a>
+        </div>
         <div class="card-body d-flex justify-content-center">
-            <div style="border-right: 1px solid #e0e0e0 !important;" class="mb-3 col-3 d-flex justify-content-center">
-                <div class="col-11">
+            <div style="border-right: 1px solid #e0e0e0 !important;" class="mb-3 col-3 mt-2 d-flex justify-content-center">
+                <div class="col-11" style="font-size: 14px;">
                     <?php foreach ($posts as $p) : ?>
                         <?php if ($p->id != $post['id']) : ?>
                             <div class="col d-flex border-bottom">
