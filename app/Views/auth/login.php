@@ -38,10 +38,21 @@
                                         <input class="form-control" name="password" type="password" placeholder="Password">
                                     </div>
                                     <div class="row">
-                                        <div class="col-6">
+                                        <div class="col-12 d-flex justify-content-center">
                                             <button class="btn btn-primary px-4" type="submit">Login</button>
                                         </div>
-                                        <div class="col-6 text-end">
+                                        <div class="col-12 divider d-flex justify-content-center my-2">
+                                            <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
+                                        </div>
+                                        <div class="col-12 d-flex justify-content-center mt-2">
+                                            <a  style="width: 300px;" class="btn btn-primary btn-lg" style="background-color: #55acee" href="<?= route_to('googleLogin') ?>" role="button">
+                                                <i class="fab fa-twitter me-2"></i>Continue with google</a>
+                                        </div>
+                                        <div class="col-12 d-flex justify-content-center mt-2">
+                                            <a style="width: 300px;" class="btn btn-success btn-lg" style="background-color: #55acee" href="<?= route_to('googleLogin') ?>" role="button">
+                                                <i class="fab fa-twitter me-2"></i>Continue with facebook</a>
+                                        </div>
+                                        <div class="col-12 d-flex justify-content-center">
                                             <button class="btn btn-link px-0" type="button">Forgot password?</button>
                                         </div>
                                     </div>

@@ -29,6 +29,19 @@
 #--------------------------------------------------------------------
 # DATABASE
 #--------------------------------------------------------------------
+database.default.hostname = mysql
+database.default.database = dbcode
+database.default.username = root
+database.default.password = dbcode
+database.default.DBDriver = MySQLi
+database.default.DBPrefix =
+database.default.port = 3306
+
+app.forceGlobalSecureRequests = false
+
+GOOGLE_CLIENT_ID = '60476328740-isfts43ici7vp2122snco3jnpf0sret9.apps.googleusercontent.com'
+GOOGLE_CLIENT_SECRET = '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'
+REDIRECT_URL = 'http://localhost:8080/admin/googleLoginCallback'
 
 # database.default.hostname = localhost
 # database.default.database = ci4

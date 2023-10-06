@@ -13,6 +13,8 @@ $routes->group('admin', function ($routes) {
     $routes->get('login', 'AuthController::login', ['as' => 'viewLogin']);
     $routes->post('login', 'AuthController::attemptLogin', ['as' => 'attemptLogin']);
     $routes->get('logout', 'AuthController::logout', ['as' => 'attemptLogout']);
+    $routes->get('googleLogin', 'AuthController::googleLogin', ['as' => 'googleLogin']);
+    $routes->get('googleLoginCallback', 'AuthController::googleLoginCallback', ['as' => 'googleLoginCallback']);
     $routes->group('', ['filter' => 'auth'], function ($routes) {
         $routes->get('/', 'DashboardController::index', ['as' => 'dashboard']);
         $routes->group('category', function ($routes) {
