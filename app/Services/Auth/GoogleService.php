@@ -1,19 +1,25 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Auth;
+
+use App\Models\Providers;
+use App\Models\User;
 
 class GoogleService
 {
     private string $googleClientID;
     private string $googleClientSecret;
     private string $redirectUri;
-
+    private $provider;
+    private $user;
 
     public function __construct()
     {
+        $this->provider = new Providers();
+        $this->user = new User();
         $this->googleClientID = env('GOOGLE_CLIENT_ID');
         $this->googleClientSecret = env('GOOGLE_CLIENT_SECRET');
-        $this->redirectUri = env('REDIRECT_URL');
+        $this->redirectUri = env('GOOGLE_REDIRECT_URL');
     }
 
     /**
@@ -49,13 +55,46 @@ class GoogleService
 
         $tokenResponse = $this->sendPostRequest($tokenUrl, $tokenData);
         $tokenInfo = json_decode($tokenResponse);
-
         if (isset($tokenInfo->access_token)) {
             $userInfoUrl = 'https://www.googleapis.com/oauth2/v1/userinfo?access_token=' . $tokenInfo->access_token;
             $userInfoResponse = $this->sendGetRequest($userInfoUrl);
-            return json_decode($userInfoResponse);
+            $userInfo = json_decode($userInfoResponse);
+            return $this->attemptLoginGoogle($userInfo);
         }
         return null;
+    }
+
+    /**
+     * attemp Authenticate login Google
+     * 
+     * @return string
+     */
+    public function attemptLoginGoogle($userInfo): string
+    {
+        if ($userInfo) {
+            $provider = $this->provider->where('provider_id', $userInfo->id)->first();
+            if (empty($provider)) {
+                $user = $this->user->where('email', $userInfo->email)->first();
+                if (empty($user)) {
+                    $data = [
+                        'name' => $userInfo->name ?? '',
+                        'email' => $userInfo->email ?? '',
+                    ];
+                    $user_id = $this->user->insert($data);
+                }
+                $data = [
+                    'name' => 'Google',
+                    'provider_id' => $userInfo->id ?? '',
+                    'user_id' => $user['id'] ?? $user_id,
+                ];
+                $this->provider->insert($data);
+                $user_id =  $data['user_id'];
+            } else {
+                $user = $this->user->find($provider['user_id']);
+                $user_id = $user['id'];
+            }
+            return $user_id;
+        }
     }
 
     /**

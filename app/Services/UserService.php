@@ -2,15 +2,18 @@
 
 namespace App\Services;
 
+use App\Models\Providers;
 use App\Models\User;
 
 class UserService
 {
     protected User $user;
+    protected Providers $provider;
 
     public function __construct()
     {
         $this->user = new User;
+        $this->provider = new Providers();
     }
 
     public function findAll(int $type = null)
@@ -62,5 +65,10 @@ class UserService
         }
         
         return false;
+    }
+
+    public function getProvider(string $user_id)
+    {
+        return $this->provider->where('user_id', $user_id)->get()->getResult();
     }
 }

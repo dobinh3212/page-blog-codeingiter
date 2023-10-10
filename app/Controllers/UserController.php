@@ -60,4 +60,13 @@ class UserController extends Controller
 
         return redirect()->to(base_url('admin/category'));
     }
+
+    public function getUser()
+    {
+        $userId = session()->get('user_id');
+        $data['user'] = $this->userService->find($userId);
+        $data['providers'] = $this->userService->getProvider($userId);
+
+        return view('admin/profile/profile', $data);
+    }
 }

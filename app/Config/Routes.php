@@ -15,8 +15,12 @@ $routes->group('admin', function ($routes) {
     $routes->get('logout', 'AuthController::logout', ['as' => 'attemptLogout']);
     $routes->get('googleLogin', 'AuthController::googleLogin', ['as' => 'googleLogin']);
     $routes->get('googleLoginCallback', 'AuthController::googleLoginCallback', ['as' => 'googleLoginCallback']);
+    $routes->get('facebookLogin', 'AuthController::facebookLogin', ['as' => 'facebookLogin']);
+    $routes->get('facebookLoginCallback', 'AuthController::facebookLoginCallback', ['as' => 'facebookLoginCallback']);
     $routes->group('', ['filter' => 'auth'], function ($routes) {
         $routes->get('/', 'DashboardController::index', ['as' => 'dashboard']);
+        $routes->get('profile', 'UserController::getUser', ['as' => 'getUser']);
+        $routes->post('editProfile', 'UserController::editProfile', ['as' => 'editProfile']);
         $routes->group('category', function ($routes) {
             $routes->get('/', 'CategoryController::index', ['as' => 'category']);
             $routes->get('create', 'CategoryController::create', ['as' => 'category.create']);

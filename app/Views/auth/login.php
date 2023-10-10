@@ -45,12 +45,16 @@
                                             <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
                                         </div>
                                         <div class="col-12 d-flex justify-content-center mt-2">
-                                            <a  style="width: 300px;" class="btn btn-primary btn-lg" style="background-color: #55acee" href="<?= route_to('googleLogin') ?>" role="button">
+                                            <a  style="width: 250px; font-size: 18px;" class="btn btn-primary btn-lg" style="background-color: #55acee" href="<?= route_to('googleLogin') ?>" role="button">
                                                 <i class="fab fa-twitter me-2"></i>Continue with google</a>
                                         </div>
                                         <div class="col-12 d-flex justify-content-center mt-2">
-                                            <a style="width: 300px;" class="btn btn-success btn-lg" style="background-color: #55acee" href="<?= route_to('googleLogin') ?>" role="button">
+                                            <a style="width: 250px; font-size: 18px;" class="btn btn-success btn-lg" style="background-color: #55acee" href="<?= route_to('facebookLogin') ?>" role="button">
                                                 <i class="fab fa-twitter me-2"></i>Continue with facebook</a>
+                                        </div>
+                                        <div class="col-12 d-flex justify-content-center mt-2">
+                                            <a style="width: 250px; font-size: 18px;" class="btn btn-info btn-lg" style="background-color: #55acee" href="<?= route_to('facebookLogin') ?>" role="button">
+                                                <i class="fab fa-twitter me-2"></i>Continue with instagram</a>
                                         </div>
                                         <div class="col-12 d-flex justify-content-center">
                                             <button class="btn btn-link px-0" type="button">Forgot password?</button>

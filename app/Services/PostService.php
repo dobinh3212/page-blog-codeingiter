@@ -104,6 +104,7 @@ class PostService
             'slugs' => $this->createSlug($request->getVar('title')),
             'description' => $request->getVar('description'),
             'content' => $request->getVar('content'),
+            'author_id' => session()->get('user_id')
         ];
         $imgFile = $request->getFile('img');
         if ($imgFile->isValid()) {
@@ -148,6 +149,7 @@ class PostService
             'slugs' => $this->createSlug($request->getVar('title')),
             'description' => $request->getVar('description'),
             'content' => $request->getVar('content'),
+            'author_id' => session()->get('user_id')
         ];
         $imgFile = $request->getFile('img');
         if ($imgFile->isValid()) {

@@ -4,7 +4,8 @@ namespace App\Controllers;
 
 use App\Models\Providers;
 use App\Models\User;
-use App\Services\GoogleService;
+use App\Services\Auth\FacebookService;
+use App\Services\Auth\GoogleService;
 use App\Services\UserService;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\RedirectResponse;
@@ -16,11 +17,13 @@ class AuthController extends Controller
     protected $googleService;
     protected $provider;
     protected $user;
+    protected $facebookService;
 
     public function __construct()
     {
         $this->userService = new UserService();
         $this->googleService = new GoogleService();
+        $this->facebookService = new FacebookService();
         $this->session = \Config\Services::session();
         $this->provider = new Providers();
         $this->user = new User();
@@ -91,31 +94,40 @@ class AuthController extends Controller
     {
         $code = $this->request->getGet('code');
         if ($code) {
-            $userInfo = $this->googleService->authenticateGoogle($code);
-            if ($userInfo) {
-                $provider = $this->provider->where('provider_id', $userInfo->id)->first();
-                if (empty($provider)) {
-                    $user = $this->user->where('email', $userInfo->email)->first();
-                    if (empty($user)) {
-                        $data = [
-                            'name' => $userInfo->name ?? '',
-                            'email' => $userInfo->email ?? '',
-                        ];
-                        $user_id = $this->user->insert($data);
-                    }
-                    $data = [
-                        'name' => 'Google',
-                        'provider_id' => $userInfo->id ?? '',
-                        'user_id' => $user['id'] ?? $user_id,
-                    ];
-                    $this->provider->insert($data);
-                    $user_id =  $data['user_id'];
-                } else {
-                    $user = $this->user->find($provider['user_id']);
-                    $user_id = $user['id'];
-                }
+            $user_id = $this->googleService->authenticateGoogle($code);
+            if ($user_id) {
                 $this->session->set('user_id', $user_id);
+                return redirect()->to(route_to('dashboard'));
+            }
+        }
+        $this->session->setFlashdata('error', 'Authentication failed');
+        return view('auth/login');
+    }
 
+    /**
+     * Login with Facebook
+     * 
+     * @return RedirectResponse
+     */
+    public function facebookLogin(): RedirectResponse
+    {
+        $authUrl = $this->facebookService->getFacebookLoginUrl();
+        header("Location: $authUrl");
+        exit();
+    }
+
+    /**
+     * Callback login with Facebook
+     * 
+     * @return RedirectResponse
+     */
+    public function facebookLoginCallback()
+    {
+        $code = $this->request->getGet('code');
+        if ($code) {
+            $user_id = $this->facebookService->authenticateFacebook($code);
+            if ($user_id) {
+                $this->session->set('user_id', $user_id);
                 return redirect()->to(route_to('dashboard'));
             }
         }
