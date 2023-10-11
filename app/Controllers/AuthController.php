@@ -6,6 +6,7 @@ use App\Models\Providers;
 use App\Models\User;
 use App\Services\Auth\FacebookService;
 use App\Services\Auth\GoogleService;
+use App\Services\Auth\InstagramService;
 use App\Services\UserService;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\RedirectResponse;
@@ -18,12 +19,14 @@ class AuthController extends Controller
     protected $provider;
     protected $user;
     protected $facebookService;
+    protected $instagramService;
 
     public function __construct()
     {
         $this->userService = new UserService();
         $this->googleService = new GoogleService();
         $this->facebookService = new FacebookService();
+        $this->instagramService = new InstagramService();
         $this->session = \Config\Services::session();
         $this->provider = new Providers();
         $this->user = new User();
@@ -126,6 +129,38 @@ class AuthController extends Controller
         $code = $this->request->getGet('code');
         if ($code) {
             $user_id = $this->facebookService->authenticateFacebook($code);
+            if ($user_id) {
+                $this->session->set('user_id', $user_id);
+                return redirect()->to(route_to('dashboard'));
+            }
+        }
+
+        $this->session->setFlashdata('error', 'Authentication failed');
+        return view('auth/login');
+    }
+
+    /**
+     * Login with Instagram
+     * 
+     * @return RedirectResponse
+     */
+    public function instagramLogin(): RedirectResponse
+    {
+        $authUrl = $this->instagramService->getInstagramLoginUrl();
+        header("Location: $authUrl");
+        exit();
+    }
+
+    /**
+     * Callback login with Facebook
+     * 
+     * @return RedirectResponse
+     */
+    public function instagramLoginCallback()
+    {
+        $code = $this->request->getGet('code');
+        if ($code) {
+            $user_id = $this->instagramService->authenticateInstagram($code);
             if ($user_id) {
                 $this->session->set('user_id', $user_id);
                 return redirect()->to(route_to('dashboard'));

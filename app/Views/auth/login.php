@@ -53,7 +53,7 @@
                                                 <i class="fab fa-twitter me-2"></i>Continue with facebook</a>
                                         </div>
                                         <div class="col-12 d-flex justify-content-center mt-2">
-                                            <a style="width: 250px; font-size: 18px;" class="btn btn-info btn-lg" style="background-color: #55acee" href="<?= route_to('facebookLogin') ?>" role="button">
+                                            <a style="width: 250px; font-size: 18px;" class="btn btn-info btn-lg" style="background-color: #55acee" href="<?= route_to('instagramLogin') ?>" role="button">
                                                 <i class="fab fa-twitter me-2"></i>Continue with instagram</a>
                                         </div>
                                         <div class="col-12 d-flex justify-content-center">
