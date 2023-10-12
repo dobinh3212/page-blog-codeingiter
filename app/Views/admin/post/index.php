@@ -42,52 +42,47 @@
             </div>
             <button type="submit" class="btn btn-primary">Search</button>
         </form>
-        <div class="body flex-grow-1 mt-3">
-            <div class="card-body d-flex">
-                <table style="font-size: 18px;" class="table table-striped">
-                    <thead>
+        <div class="card-body py-5">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col-2">ID</th>
+                        <th scope="col-2">Title</th>
+                        <th scope="col-2">Description</th>
+                        <th scope="col-2">Content</th>
+                        <th scope="col-2">Image</th>
+                        <th class="text-center" scope="col-4">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($posts as $post) : ?>
                         <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Title</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Content</th>
-                            <th scope="col">Image</th>
-                            <th style="width: 50px;" class="text-center" scope="col">Action</th>
+                            <th scope="col-2"><?= $post->id ?></th>
+                            <td scope="col-2"><?= $post->title ?></td>
+                            <td scope="col-2"><?= $post->description ?></td>
+                            <td scope="col-2"><?= $post->content ?></td>
+                            <td scope="col-2"><img src="<?= base_url($post->img ?? '') ?>" width="100px" height="80px"></td>
+                            <td scope="col-4" style="text-align: center;">
+                                <form method="POST" action="<?= route_to('post.delete', $post->id) ?>">
+                                    <?= csrf_field() ?>
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <div>
+                                        <a href="<?= route_to('post.show', $post->id) ?>" class="btn btn-primary btn-xs col-12 mb-1">
+                                            show
+                                        </a>
+                                        <a href="<?= route_to('post.edit', $post->id) ?>" class="btn btn-primary btn-xs col-12 mb-1">
+                                            edit
+                                        </a>
+                                        <button type="submit" class="btn btn-danger btn-xs col-12" onclick="return confirm('Bạn có chắc không?')">
+                                            <i class="far fa-trash-alt"></i> delete
+                                        </button>
+                                    </div>
+                                </form>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($posts as $post) : ?>
-                            <tr>
-                                <th><?= $post->id ?></th>
-                                <td><?= $post->title ?></td>
-                                <td><?= $post->description ?></td>
-                                <td><?= $post->content ?></td>
-                                <td><img src="<?= base_url($post->img ?? '') ?>" width="100px" height="80px"></td>
-                                <td style="text-align: center; width: 50px;">
-                                    <form method="POST" action="<?= route_to('post.delete', $post->id) ?>">
-                                        <?= csrf_field() ?>
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <div>
-                                            <a href="<?= route_to('post.show', $post->id) ?>" class="btn btn-primary btn-xs col-12 mb-1">
-                                                show
-                                            </a>
-                                            <a href="<?= route_to('post.edit', $post->id) ?>" class="btn btn-primary btn-xs col-12 mb-1">
-                                                edit
-                                            </a>
-                                            <button type="submit" class="btn btn-danger btn-xs col-12" onclick="return confirm('Bạn có chắc không?')">
-                                                <i class="far fa-trash-alt"></i> delete
-                                            </button>
-                                        </div>
-                                    </form>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </div>
-            <div class="d-flex justify-content-end me-3">
-
-            </div>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

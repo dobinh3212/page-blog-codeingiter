@@ -2,7 +2,8 @@
     <a class="nav-link text-dark" id="isActive" href="<?= route_to('/') ?>">Dashboard</a>
     <a class="nav-link text-dark" id="isActiveBlog" href="<?= route_to('blog.blog') ?>">Blog</a>
     <a class="nav-link text-dark" id="isActiveWork" href="<?= route_to('blog.work') ?>">Works</a>
-    <a class="nav-link text-dark" href="#">Contacts</a>
+    <a class="nav-link text-dark" href="#">Contacts</a>        
+    <a href="<?= route_to('viewLogin') ?>" class="btn btn-primary btn-xs">Login</a>
 </nav>
 
 <div class="collapse hide-navbar" id="navbarToggleExternalContent">
@@ -12,6 +13,7 @@
             <a class="nav-link text-dark" href="<?= route_to('blog.blog') ?>">Blog</a>
             <a class="nav-link text-dark" href="<?= route_to('blog.work') ?>">Works</a>
             <a class="nav-link text-dark" href="#">Contacts</a>
+            <a href="<?= route_to('viewLogin') ?>" class="btn btn-primary btn-xs">Login</a>
         </div>
     </div>
 </div>

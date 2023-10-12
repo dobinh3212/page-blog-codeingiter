@@ -16,15 +16,15 @@
 <div class="container-lg mt-4">
     <div class="card mb-4">
         <?php if (session()->has('error')) : ?>
-        <div class="alert alert-danger" role="alert">
-            <?= session('error') ?>
-        </div>
+            <div class="alert alert-danger" role="alert">
+                <?= session('error') ?>
+            </div>
         <?php endif ?>
 
         <?php if (session()->has('success') || !empty($success)) : ?>
-        <div class="alert alert-success" role="alert">
-            <?= session('success') ?? $success ?>
-        </div>
+            <div class="alert alert-success" role="alert">
+                <?= session('success') ?? $success ?>
+            </div>
         <?php endif ?>
         <div style="font-size: 24px;" class="card-header d-flex">
             <div class="col-6">
@@ -42,19 +42,18 @@
             </div>
             <button type="submit" class="btn btn-primary">Search</button>
         </form>
-        <div class="body flex-grow-1 px-5 mt-3">
-            <div class="card-body d-flex">
-                <table style="font-size: 18px;" class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Email</th>
-                            <th style="width: 200px;" class="text-center" scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($users as $user) : ?>
+        <div class="card-body py-5">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th style="width: 200px;" class="text-center" scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($users as $user) : ?>
                         <tr>
                             <th><?= $user['id'] ?></th>
                             <td><?= $user['name'] ?></td>
@@ -77,13 +76,9 @@
                                 </form>
                             </td>
                         </tr>
-                        <?php endforeach ?>
-                    </tbody>
-                </table>
-            </div>
-            <div class="d-flex justify-content-end me-3">
-     
-            </div>
+                    <?php endforeach ?>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

@@ -4,10 +4,11 @@
       <svg class="icon icon-lg">
       </svg>
     </button>
-    <ul class="header-nav d-none d-md-flex">
-      <li class="nav-item"><a class="nav-link" href="#">Dashboard</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">Users</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">Settings</a></li>
+    <ul class="header-nav d-md-flex">
+      <li class="col-3 justify-content-center d-flex"><a class="nav-link" href="<?= base_url('admin') ?>">Dashboard</a></li>
+      <li class="col-3 justify-content-center d-flex"><a class="nav-link" href="<?= base_url('admin/user') ?>">User</a></li>
+      <li class="col-3 justify-content-center d-flex"><a class="nav-link" href="<?= base_url('admin/category') ?>">Category</a></li>
+      <li class="col-3 justify-content-center d-flex"><a class="nav-link" href="<?= base_url('admin/post') ?>">Post</a></li>
     </ul>
     <ul class="header-nav ms-3">
       <li class="nav-item dropdown"><a class="nav-link py-0" data-coreui-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">

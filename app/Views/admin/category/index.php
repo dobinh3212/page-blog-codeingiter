@@ -16,15 +16,15 @@
 <div class="container-lg mt-4">
     <div class="card mb-4">
         <?php if (session()->has('error')) : ?>
-        <div class="alert alert-danger" role="alert">
-            <?= session('error') ?>
-        </div>
+            <div class="alert alert-danger" role="alert">
+                <?= session('error') ?>
+            </div>
         <?php endif ?>
 
         <?php if (session()->has('success') || !empty($success)) : ?>
-        <div class="alert alert-success" role="alert">
-            <?= session('success') ?? $success ?>
-        </div>
+            <div class="alert alert-success" role="alert">
+                <?= session('success') ?? $success ?>
+            </div>
         <?php endif ?>
         <div style="font-size: 24px;" class="card-header d-flex">
             <div class="col-6">
@@ -42,26 +42,25 @@
             </div>
             <button type="submit" class="btn btn-primary">Search</button>
         </form>
-        <div class="body flex-grow-1 px-5 mt-3">
-            <div class="card-body d-flex">
-                <table style="font-size: 18px;" class="table table-striped">
-                    <thead>
+        <div class="card-body py-5">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col-2">ID</th>
+                        <th scope="col-2">Name</th>
+                        <th scope="col-2">Type</th>
+                        <th scope="col-2">Parent</th>
+                        <th class="text-center" scope="col-4">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($categorys as $category) : ?>
                         <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Type</th>
-                            <th scope="col">Parent</th>
-                            <th style="width: 200px;" class="text-center" scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($categorys as $category) : ?>
-                        <tr>
-                            <th><?= $category['id'] ?></th>
-                            <td><?= $category['name'] ?></td>
-                            <td><?= $category['type'] == 1 ? 'Category' : ($category['type'] == 2 ? 'Tag' : '') ?></td>
-                            <td><?= $category['parent_name'] ?? '' ?></td>
-                            <td style="text-align: center; width: 230px;">
+                            <th scope="col-2"><?= $category['id'] ?></th>
+                            <td scope="col-2"><?= $category['name'] ?></td>
+                            <td scope="col-2"><?= $category['type'] == 1 ? 'Category' : ($category['type'] == 2 ? 'Tag' : '') ?></td>
+                            <td scope="col-2"><?= $category['parent_name'] ?? '' ?></td>
+                            <td scope="col-4" style="text-align: center;">
                                 <form method="POST" action="<?= route_to('category.delete', $category['id']) ?>">
                                     <?= csrf_field() ?>
                                     <input type="hidden" name="_method" value="DELETE">
@@ -79,13 +78,9 @@
                                 </form>
                             </td>
                         </tr>
-                        <?php endforeach ?>
-                    </tbody>
-                </table>
-            </div>
-            <div class="d-flex justify-content-end me-3">
-     
-            </div>
+                    <?php endforeach ?>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
