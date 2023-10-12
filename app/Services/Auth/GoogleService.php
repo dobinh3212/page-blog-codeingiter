@@ -19,7 +19,7 @@ class GoogleService
         $this->user = new User();
         $this->googleClientID = env('GOOGLE_CLIENT_ID');
         $this->googleClientSecret = env('GOOGLE_CLIENT_SECRET');
-        $this->redirectUri = env('GOOGLE_REDIRECT_URL');
+        $this->redirectUri = base_url(env('GOOGLE_REDIRECT_URL'));
     }
 
     /**

@@ -41,7 +41,15 @@ app.forceGlobalSecureRequests = false
 
 GOOGLE_CLIENT_ID = '60476328740-isfts43ici7vp2122snco3jnpf0sret9.apps.googleusercontent.com'
 GOOGLE_CLIENT_SECRET = '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'
-REDIRECT_URL = 'http://localhost:8080/admin/googleLoginCallback'
+GOOGLE_REDIRECT_URL = '/admin/googleLoginCallback'
+
+FACEBOOK_CLIENT_ID = '304727882302233'
+FACEBOOK_CLIENT_SECRET = 'f7870644bad223e1cc7c5ef29f18d7d1'
+FACEBOOK_REDIRECT_URL = '/admin/facebookLoginCallback'
+
+INSTAGRAM_CLIENT_ID = '355987627224429'
+INSTAGRAM_CLIENT_SECRET = 'be27ef14f44b3c47d0bc75abacc1bde1'
+INSTAGRAM_REDIRECT_URL = '/admin/instagramLoginCallback'
 
 # database.default.hostname = localhost
 # database.default.database = ci4

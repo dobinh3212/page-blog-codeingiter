@@ -22,7 +22,7 @@ class InstagramService
         $this->user = new User();
         $this->instagramClientID = env('INSTAGRAM_CLIENT_ID');
         $this->instagramClientSecret = env('INSTAGRAM_CLIENT_SECRET');
-        $this->instagramRedirectUri = env('INSTAGRAM_REDIRECT_URL');
+        $this->instagramRedirectUri = base_url(env('INSTAGRAM_REDIRECT_URL'));
     }
 
     /**

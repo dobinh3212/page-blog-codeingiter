@@ -19,7 +19,7 @@ class FacebookService
         $this->user = new User();
         $this->facebookID = env('FACEBOOK_CLIENT_ID');
         $this->facebookSecret = env('FACEBOOK_CLIENT_SECRET');
-        $this->facebookRedirectUri = env('FACEBOOK_REDIRECT_URL');
+        $this->facebookRedirectUri = base_url(env('FACEBOOK_REDIRECT_URL'));
     }
 
     /**
