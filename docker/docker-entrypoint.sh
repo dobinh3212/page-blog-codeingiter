@@ -14,7 +14,7 @@ composer install
 # pecl install xdebug
 
 # docker-php-ext-enable xdebug
-
+php spark migrate
 # Start server
 php spark serve --host 0.0.0.0
 
